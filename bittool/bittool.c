@@ -11,7 +11,7 @@ uint32_t read_arg(char *arg) {
         fprintf(stderr, "bittool: invalid char in number %s\n", arg);
         exit(-1);
     }
-    if (value < 0 || value >= UINT32_MAX) {
+    if (value < 0 || value > UINT32_MAX) {
         fprintf(stderr, "bittool: number %s out of range\n", arg);
         exit(-1);
     }
