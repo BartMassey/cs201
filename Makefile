@@ -24,7 +24,7 @@ cast: cast.c
 	$(CC) $(CFLAGS) -o cast cast.c
 
 div0: div0.c
-	$(CC) $(CFLAGS) -o div0 div0.c
+	$(CC) $(CFLAGS) -Wno-div-by-zero -o div0 div0.c
 
 dumbidx: dumbidx.c
 	$(CC) $(CFLAGS) -o dumbidx dumbidx.c
