@@ -25,7 +25,7 @@ uint32_t f(uint32_t *cp) {
 
 int main() {
     /* Allocated on heap by malloc(), not initialized. */
-    uint32_t *cp  = (uint32_t *) malloc(sizeof *cp);
+    uint32_t *cp  = malloc(sizeof *cp);
     *cp = 8;
     /* Prints a + b + *cp + 3 == 16. */
     printf("%d\n", f(cp)); 
