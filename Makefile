@@ -5,12 +5,12 @@ CC = gcc
 CFLAGS = -Wall -g
 
 SRC = 	avg.c badptr.c cast.c div0.c dumbidx.c enum.c ftoc.c \
-	ftoc_fixed.c ftoc_zero.c intsize.c negdiv.c overflow.c \
-	promotion.c stdint.c uni.c walk.c
+	ftoc_fixed.c ftoc_zero.c intsize.c mem.c negdiv.c \
+	overflow.c promotion.c stdint.c uni.c walk.c
 
 BIN = 	avg badptr cast div0 dumbidx enum ftoc \
-	ftoc_fixed ftoc_zero intsize negdiv overflow \
-	promotion stdint uni walk
+	ftoc_fixed ftoc_zero intsize mem negdiv \
+	overflow promotion stdint uni walk
 
 all: $(BIN)
 
@@ -43,6 +43,9 @@ ftoc_zero: ftoc_zero.c
 
 intsize: intsize.c
 	$(CC) $(CFLAGS) -o intsize intsize.c
+
+mem: mem.c
+	$(CC) $(CFLAGS) -o mem mem.c
 
 negdiv: negdiv.c
 	$(CC) $(CFLAGS) -o negdiv negdiv.c
