@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * Given a string that represents a number, return the
+ * number.
+ */
 uint32_t read_arg(char *arg) {
     char *endptr = arg;
     int64_t value = strtoll(arg, &endptr, 0);
@@ -19,11 +23,15 @@ uint32_t read_arg(char *arg) {
 }
 
 void show_bits(char *a1, char *a2) {
-    /* Insert your code for the two arguments case here. */
+    /* Put your code for the two arguments case here. */
+    fprintf(stderr, "show_bits not yet implemented\n");
+    exit(1);
 }
 
 void set_bits(int na, char **a) {
-    /* Insert your code for the three-plus arguments case here. */
+    /* Put your code for the three-plus arguments case here. */
+    fprintf(stderr, "set_bits not yet implemented\n");
+    exit(1);
 }
 
 int main(int argc, char **argv) {
