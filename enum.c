@@ -2,7 +2,7 @@
 
 enum state {
     STATE_INITIAL,
-    STATE_PLAYING,
+    STATE_PLAYING = 17,
     STATE_PAUSED,
 };
 
@@ -12,6 +12,6 @@ int main() {
     if (s == STATE_PLAYING) {
         s = STATE_PAUSED;
     }
-    printf("%d\n", s);
+    printf("%d\n", STATE_PAUSED);
     return 0;
 }
