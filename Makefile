@@ -5,12 +5,14 @@ CC = gcc
 CFLAGS = -Wall -g
 
 SRC = 	avg.c badptr.c cast.c div0.c dumbidx.c endian.c enum.c \
-	flmul.c flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c intsize.c \
-	mem.c negdiv.c overflow.c promotion.c stdint.c uni.c walk.c
+	finit.c flmul.c flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c \
+	intsize.c mem.c negdiv.c overflow.c promotion.c stdint.c \
+	uni.c walk.c
 
 BIN = 	avg badptr cast div0 dumbidx endian enum \
-	flmul flsub ftoc ftoc_fixed ftoc_zero intsize \
-	mem negdiv overflow promotion stdint uni walk
+	finit flmul flsub ftoc ftoc_fixed ftoc_zero \
+	intsize mem negdiv overflow promotion stdint \
+	uni walk
 
 all: $(BIN)
 
@@ -34,6 +36,9 @@ endian: endian.c
 
 enum: enum.c
 	$(CC) $(CFLAGS) -o enum enum.c
+
+finit: finit.c
+	$(CC) $(CFLAGS) -o finit finit.c
 
 flmul: flmul.c
 	$(CC) -g -Wall -o flmul flmul.c
