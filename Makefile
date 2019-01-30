@@ -79,5 +79,8 @@ uni: uni.c
 walk: walk.c
 	$(CC) $(CFLAGS) -o walk walk.c
 
+finitcpp.c: finit.c
+	$(CC) -E finit.c | uniq -u | egrep -v '^#' >finitcpp.c
+
 clean:
 	-rm -f $(BIN)

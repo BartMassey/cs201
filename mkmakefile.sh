@@ -32,6 +32,10 @@ do
     echo ""
 done
 
+cat extra.mk
+
+echo ""
+
 cat <<EOF
 clean:
 	-rm -f \$(BIN)
