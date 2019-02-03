@@ -6,13 +6,13 @@ CFLAGS = -Wall -g
 
 SRC = 	avg.c badptr.c cast.c div0.c dumbidx.c endian.c enum.c \
 	finit.c flmul.c flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c \
-	intsize.c mem.c negdiv.c overflow.c promotion.c stdint.c \
-	uni.c walk.c
+	intsize.c mem.c negdiv.c nnss.c overflow.c promotion.c \
+	stdint.c strtoi32.c uni.c walk.c
 
 BIN = 	avg badptr cast div0 dumbidx endian enum \
 	finit flmul flsub ftoc ftoc_fixed ftoc_zero \
-	intsize mem negdiv overflow promotion stdint \
-	uni walk
+	intsize mem negdiv nnss overflow promotion \
+	stdint strtoi32 uni walk
 
 all: $(BIN)
 
@@ -64,6 +64,11 @@ mem: mem.c
 negdiv: negdiv.c
 	$(CC) $(CFLAGS) -o negdiv negdiv.c
 
+nnss: nnss.o strtoi32.o
+	$(CC) $(CFLAGS) -o nnss nnss.o strtoi32.o
+
+nnss.o: strtoi32.h
+
 overflow: overflow.c
 	$(CC) $(CFLAGS) -Wno-overflow -o overflow overflow.c
 
@@ -72,6 +77,11 @@ promotion: promotion.c
 
 stdint: stdint.c
 	$(CC) $(CFLAGS) -o stdint stdint.c
+
+strtoi32.o: strtoi32.c
+	$(CC) $(CFLAGS) -c strtoi32.c
+
+strtoi32.o: strtoi32.h
 
 uni: uni.c
 	$(CC) $(CFLAGS) -o uni uni.c
@@ -83,4 +93,4 @@ finitcpp.c: finit.c
 	$(CC) -E finit.c | uniq -u | egrep -v '^#' >finitcpp.c
 
 clean:
-	-rm -f $(BIN)
+	-rm -f *.o $(BIN)

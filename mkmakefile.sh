@@ -22,21 +22,35 @@ EOF
 for S in $TARGETS
 do
     B=`echo $S | sed 's/\.c//'`
-    echo "$B: $S"
-    M="\$(CC) \$(CFLAGS) -o $B $S"
+    D="$B: $S"
+    M="	\$(CC) \$(CFLAGS) -o $B $S"
     if [ -f $B.mk ]
     then
-        M="`cat $B.mk`"
+        case "`wc -l <$B.mk`" in
+            0)
+                echo "error: empty $B.mk" >&2
+                exit 1
+                ;;
+            1)
+                echo "$D"
+                echo -n '	'
+                cat $B.mk
+                ;;
+            *)
+                cat $B.mk
+                ;;
+        esac
+    else
+        echo "$D"
+        echo "$M"
     fi
-    echo "	$M"
     echo ""
 done
 
 cat extra.mk
-
 echo ""
 
 cat <<EOF
 clean:
-	-rm -f \$(BIN)
+	-rm -f *.o \$(BIN)
 EOF
