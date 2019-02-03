@@ -4,23 +4,29 @@
 CC = gcc
 CFLAGS = -Wall -g
 
-SRC = 	avg.c badptr.c cast.c div0.c dumbidx.c endian.c enum.c \
-	finit.c flmul.c flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c \
-	intsize.c mem.c negdiv.c nnss.c overflow.c promotion.c \
-	stdint.c strtoi32.c uni.c walk.c
+SRC = 	arconst.c avg.c badptr.c brloop.c cast.c div0.c dumbidx.c \
+	endian.c enum.c finit.c flmul.c flsub.c ftoc.c ftoc_fixed.c \
+	ftoc_zero.c intsize.c mem.c negdiv.c nnss.c overflow.c \
+	promotion.c stdint.c strtoi32.c uni.c walk.c
 
-BIN = 	avg badptr cast div0 dumbidx endian enum \
-	finit flmul flsub ftoc ftoc_fixed ftoc_zero \
-	intsize mem negdiv nnss overflow promotion \
-	stdint strtoi32 uni walk
+BIN = 	arconst avg badptr brloop cast div0 dumbidx \
+	endian enum finit flmul flsub ftoc ftoc_fixed \
+	ftoc_zero intsize mem negdiv nnss overflow \
+	promotion stdint strtoi32 uni walk
 
 all: $(BIN)
+
+arconst: arconst.c
+	$(CC) $(CFLAGS) -o arconst arconst.c
 
 avg: avg.c
 	$(CC) $(CFLAGS) -o avg avg.c
 
 badptr: badptr.c
 	$(CC) $(CFLAGS) -o badptr badptr.c
+
+brloop: brloop.c
+	$(CC) $(CFLAGS) -o brloop brloop.c
 
 cast: cast.c
 	$(CC) $(CFLAGS) -o cast cast.c
@@ -44,7 +50,7 @@ flmul: flmul.c
 	$(CC) -g -Wall -o flmul flmul.c
 
 flsub: flsub.c
-	$(CC) -g -Wall -o flmul flmul.c
+	$(CC) -g -Wall -o flsub flsub.c
 
 ftoc: ftoc.c
 	$(CC) $(CFLAGS) -o ftoc ftoc.c
