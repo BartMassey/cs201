@@ -1,1 +1,1 @@
-$(CC) -g -Wall -o flmul flmul.c
+$(CC) -g -Wall -o flsub flsub.c
