@@ -12,6 +12,14 @@ struct digraphs {
      * is the first character in the digraph; the right (column)
      * index is the second character. Indices 0..25 are the lowercase
      * characters in order; 26..51 are the uppercase characters.
+     *
+     * When you see a valid digraph, subtract 'a' or 'A' from each
+     * of the characters as appropriate to get an index in the range
+     * 0..51 for each position. Then increment the count at
+     * the given position in the counts table.
+     *
+     * Example: You see "ea". 'e' - 'a' = 4. 'a' - 'a' = 0. So
+     * do counts[4][0]++
      */
     uint64_t counts[52][52];
 };
