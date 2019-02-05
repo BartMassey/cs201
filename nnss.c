@@ -30,6 +30,10 @@ int main(int argc, char **argv) {
     int nvals = argc - 1;
     assert(nvals >= 0);
     int32_t *vals = malloc(nvals * sizeof *vals);
+    if (!vals) {
+        perror("nnss: malloc");
+        return -1;
+    }
 
     for (int i = 0; i < nvals; i++) {
         int result = strtoi32(argv[i], &vals[i]);
@@ -46,5 +50,6 @@ int main(int argc, char **argv) {
     }
     printf("%ld\n", result);
 
+    free(vals);
     return 0;
 }
