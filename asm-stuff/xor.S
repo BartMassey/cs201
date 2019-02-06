@@ -3,5 +3,5 @@
 	.globl  asmfn
 asmfn: 
 	movq    %rsi, %rax
-        addq    %rdi, %rax
+        xorq    %rdi, %rax
         ret
