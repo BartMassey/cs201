@@ -47,9 +47,12 @@ much on a modern machine.
 
 * For the `-p` option, you should recursively walk down into
   the subdirectories counting digraphs in all file and
-  directory names encountered. Do not follow symbolic links:
-  count the digraphs in the link name and then stop the
-  search.
+  directory names encountered. Treat each name as a separate
+  word: do not count digraphs across name boundaries. Do not
+  follow symbolic links: count the digraphs in the link name
+  and then stop the search. Similarly, do not traverse into
+  directories whose names begin with `.`. (The directories
+  `.` and `..` are particularly problematic.)
 
 * If an error is encountered, your program must print "Error
   encountered: exiting." to `stderr` and then exit with
@@ -79,29 +82,29 @@ referenced above should look something like this:
 
 ## Required Program Structure
 
-* Your program should consist of three files: `digraphs.c`,
-  `fs.c`, `text.c`. Your code should compile with the
-  provided Makefile as-is.
+* Your program should consist of at least three files:
+  `digraphs.c`, `fs.c`, `text.c`. Your code must have a
+  working `Makefile`: please use the provided one as a base.
 
-* You must include the provided "digraphs.h" as-is in each
-  source file, and use its declarations.
+* You must include the provided `digraphs.h` in each
+  source file and use its declarations.
+  
+* You may add to `digraphs.h` and the `Makefile` as needed.
 
 ## Hints
 
-* You will need to `malloc()` the `struct digraphs`: don't
-  forget to initialize it.
+* You need to `malloc()` the `struct digraphs`: don't forget
+  to initialize this memory.
 
 * Writing the directory walker recursively will be *much*
-  easier.
+  easier. Use `chdir("name")` to enter the directory
+  `"name"`, use `chdir("..")` to leave.
 
-* You will want to use `opendir()` / `readdir()` /
-  `closedir()` for reading directories: see the manual.
-
-* You will want to use `lstat()` for finding out whether a
-  given name is a directory to be traversed or something
-  else. The expression `st.st_mode & S_IFDIR` will be
-  nonzero if and only if the stat structure `st` describes
-  a directory.
+* Use `opendir()` / `readdir()` / `closedir()` for reading
+  directories: see the manual.  You will need to `#define
+  _DEFAULT_SOURCE` before `#include <dirent.h>`.  The
+  expression `e.d_type & DT_DIR` will be nonzero if and only
+  if the directory entry `e` is itself a directory.
 
 * It may be helpful to build an array of the following struct
   for sorting the digraphs:
@@ -110,6 +113,11 @@ referenced above should look something like this:
             char digraph[2];
             uint64_t count;
         };
+
+  Use the `qsort()` library routine to sort your digraphs:
+  read the manual page carefully for usage, and ask if you
+  have questions. The comparison function will require the
+  use of `const` to avoid warnings.
 
 * You could use a library such as `getopt` to look at the
   command line arguments, but again it shouldn't really be

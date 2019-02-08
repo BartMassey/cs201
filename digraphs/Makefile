@@ -3,12 +3,12 @@
 
 CC = gcc
 CFLAGS = -std=c11 -Wall -Werror -g
-OBJS = digraphs.o readtext.o readfs.o
+OBJS = digraphs.o text.o fs.o
 
-digraphs: digraphs.o
+digraphs: $(OBJS)
 	$(CC) $(CFLAGS) -o digraphs $(OBJS)
 
 $(OBJS): digraphs.h
 
 clean:
-	-rm -f digraphs
+	-rm -f *.o digraphs
