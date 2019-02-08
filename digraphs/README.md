@@ -128,9 +128,10 @@ referenced above should look something like this:
 
 ## Coding Style
 
-Please name your program `prtest.c`.  Your program must be
-formatted according to the course coding guidelines. It must
-be valid C11 and compile without warnings or errors.
+Please name your main program `digraphs.c`.  Your program
+must be formatted according to the course coding
+guidelines. It must be valid C11 and compile without
+warnings or errors.
 
 The code should be as clear and readable as you can make it:
 the graders and TAs are going to read a *lot* of programs,
