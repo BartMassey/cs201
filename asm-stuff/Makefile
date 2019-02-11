@@ -4,7 +4,7 @@ CC = gcc
 CDEBUG = -g
 CFLAGS = $(CDEBUG) -Wall -Werror -fno-pic -no-pie -static
 
-BINS = add add_c xor xor_c loop exp call
+BINS = add add_c xor xor_c loop exp exp_c call
 
 .S.o:
 	$(CC) $(CFLAGS) -c $*.S
@@ -33,6 +33,9 @@ loop: driver.o loop.o
 
 exp: driver.o exp.o
 	$(CC) $(CFLAGS) -o exp driver.o exp.o
+
+exp_c: driver.o exp_c.o
+	$(CC) $(CFLAGS) -o exp_c driver.o exp_c.o
 
 call: driver.o call.o
 	$(CC) $(CFLAGS) -o call driver.o call.o
