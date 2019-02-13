@@ -1,23 +1,21 @@
 # arg 0 in %rdi, arg 1 in %rsi, result in %rax
 	
 	.globl asmfn
-	# uint64_t asmfn(uint32_t b, uint32_t x)
+	# We will treat the arguments as int32_t
+	# int64_t asmfn(int64_t b, int64_t x)
 asmfn: 
-	# (save %rdx)
-	pushq   %rdx
 	
 	# uint64_t result = 1
-	xorq    %rax, %rax
-	movb    $1, %al
+	movq    $1, %rax
 	
 .L0:
 	# while (x != 0) {
-        cmpl    $0, %esi
+        testl   %esi, %esi
         jz      .L1
 	
 	#     result *= b
-	# (mul is special: %rax is implicit arg, %rdx:%rax result)
-	mulq    %rdi
+	# (imul is special: %rax is arg, %rdx:%rax result)
+	imulq   %rdi, %rax
 	
 	#     x--
         decl    %esi
@@ -26,7 +24,5 @@ asmfn:
 	jmp     .L0
 	
 .L1:
-	# (restore %rdx)
-        popq    %rdx
 	# return result
         ret
