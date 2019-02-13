@@ -52,5 +52,5 @@ echo ""
 
 cat <<EOF
 clean:
-	-rm -f *.o \$(BIN)
+	-rm -f *.o *.s \$(BIN)
 EOF
