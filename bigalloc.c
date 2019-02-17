@@ -16,6 +16,6 @@ int main() {
             np[i] = x;
         p = np;
     }
-    printf("%lx %lx\n", x, p);
+    printf("%lx %lx\n", x, (uint64_t) p);
     return 0;
 }
