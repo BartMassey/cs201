@@ -81,10 +81,10 @@ mem: mem.c
 negdiv: negdiv.c
 	$(CC) $(CFLAGS) -o negdiv negdiv.c
 
-nnss: nnss.o strtoi32.o
-	$(CC) $(CFLAGS) -o nnss nnss.o strtoi32.o
+nnss: nnss.o strtoi32/strtoi32.o
+	$(CC) $(CFLAGS) -o nnss nnss.o strtoi32/strtoi32.o
 
-nnss.o: strtoi32.h
+nnss.o: strtoi32/strtoi32.h
 
 overflow: overflow.c
 	$(CC) $(CFLAGS) -Wno-overflow -o overflow overflow.c
@@ -97,11 +97,6 @@ readit: readit.c
 
 stdint: stdint.c
 	$(CC) $(CFLAGS) -o stdint stdint.c
-
-strtoi32.o: strtoi32.c
-	$(CC) $(CFLAGS) -c strtoi32.c
-
-strtoi32.o: strtoi32.h
 
 uni: uni.c
 	$(CC) $(CFLAGS) -o uni uni.c

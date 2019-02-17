@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "strtoi32.h"
+#include "strtoi32/strtoi32.h"
 
 /*
  * Return the sum of squares of all the non-negative

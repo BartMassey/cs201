@@ -1,4 +1,4 @@
-nnss: nnss.o strtoi32.o
-	$(CC) $(CFLAGS) -o nnss nnss.o strtoi32.o
+nnss: nnss.o strtoi32/strtoi32.o
+	$(CC) $(CFLAGS) -o nnss nnss.o strtoi32/strtoi32.o
 
-nnss.o: strtoi32.h
+nnss.o: strtoi32/strtoi32.h
