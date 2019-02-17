@@ -7,14 +7,14 @@ CFLAGS = -Wall -g
 SRC = 	arconst.c avg.c badptr.c bigalloc.c bigdata.c brloop.c \
 	cast.c div0.c dumbidx.c endian.c enum.c finit.c flmul.c \
 	flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c hello.c intsize.c \
-	mem.c negdiv.c nnss.c overflow.c promotion.c stdint.c \
-	strtoi32.c uni.c walk.c
+	mem.c negdiv.c nnss.c overflow.c promotion.c readit.c \
+	stdint.c strtoi32.c uni.c walk.c
 
 BIN = 	arconst avg badptr bigalloc bigdata brloop \
 	cast div0 dumbidx endian enum finit flmul \
 	flsub ftoc ftoc_fixed ftoc_zero hello intsize \
-	mem negdiv nnss overflow promotion stdint \
-	strtoi32 uni walk
+	mem negdiv nnss overflow promotion readit \
+	stdint strtoi32 uni walk
 
 all: $(BIN)
 
@@ -91,6 +91,9 @@ overflow: overflow.c
 
 promotion: promotion.c
 	$(CC) $(CFLAGS) -o promotion promotion.c
+
+readit: readit.c
+	$(CC) $(CFLAGS) -o readit readit.c
 
 stdint: stdint.c
 	$(CC) $(CFLAGS) -o stdint stdint.c
