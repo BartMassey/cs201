@@ -4,19 +4,22 @@
 CC = gcc
 CFLAGS = -Wall -g
 
-SRC = 	arconst.c avg.c badptr.c bigalloc.c bigdata.c brloop.c \
-	cast.c div0.c dumbidx.c endian.c enum.c finit.c flmul.c \
-	flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c hello.c intsize.c \
-	lls.c mem.c negdiv.c nnss.c nop.c overflow.c promotion.c \
-	readit.c stdint.c uni.c walk.c xadd.c
+SRC = 	arc.c arconst.c avg.c badptr.c bigalloc.c bigdata.c \
+	brloop.c cast.c div0.c dumbidx.c endian.c enum.c finit.c \
+	flmul.c flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c hello.c \
+	intsize.c lls.c mem.c negdiv.c nnss.c nop.c overflow.c \
+	promotion.c readit.c stdint.c uni.c walk.c xadd.c
 
-BIN = 	arconst avg badptr bigalloc bigdata brloop \
-	cast div0 dumbidx endian enum finit flmul \
-	flsub ftoc ftoc_fixed ftoc_zero hello intsize \
-	lls mem negdiv nnss nop overflow promotion \
-	readit stdint uni walk xadd
+BIN = 	arc arconst avg badptr bigalloc bigdata \
+	brloop cast div0 dumbidx endian enum finit \
+	flmul flsub ftoc ftoc_fixed ftoc_zero hello \
+	intsize lls mem negdiv nnss nop overflow \
+	promotion readit stdint uni walk xadd
 
 all: $(BIN)
+
+arc: arc.c
+	$(CC) $(CFLAGS) -o arc arc.c
 
 arconst: arconst.c
 	$(CC) $(CFLAGS) -o arconst arconst.c
