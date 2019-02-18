@@ -17,7 +17,6 @@ int main() {
             printf(" [dir]");
         printf("\n");
     }
-    extern int errno;
     assert(errno == 0);
     closedir(d);
     return 0;
