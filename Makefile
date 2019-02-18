@@ -7,13 +7,13 @@ CFLAGS = -Wall -g
 SRC = 	arconst.c avg.c badptr.c bigalloc.c bigdata.c brloop.c \
 	cast.c div0.c dumbidx.c endian.c enum.c finit.c flmul.c \
 	flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c hello.c intsize.c \
-	mem.c negdiv.c nnss.c overflow.c promotion.c readit.c \
+	mem.c negdiv.c nnss.c nop.c overflow.c promotion.c readit.c \
 	stdint.c uni.c walk.c
 
 BIN = 	arconst avg badptr bigalloc bigdata brloop \
 	cast div0 dumbidx endian enum finit flmul \
 	flsub ftoc ftoc_fixed ftoc_zero hello intsize \
-	mem negdiv nnss overflow promotion readit \
+	mem negdiv nnss nop overflow promotion readit \
 	stdint uni walk
 
 all: $(BIN)
@@ -86,6 +86,9 @@ nnss: nnss.o strtoi32/strtoi32.o
 
 nnss.o: strtoi32/strtoi32.h
 
+nop: nop.c
+	$(CC) $(CFLAGS) -o nop nop.c
+
 overflow: overflow.c
 	$(CC) $(CFLAGS) -Wno-overflow -o overflow overflow.c
 
@@ -106,6 +109,9 @@ walk: walk.c
 
 finitcpp.c: finit.c
 	$(CC) -E finit.c | uniq -u | egrep -v '^#' >finitcpp.c
+
+.c.s:
+	$(CC) $(CFLAGS) -S $*.c
 
 clean:
 	-rm -f *.o *.s $(BIN)
