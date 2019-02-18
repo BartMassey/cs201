@@ -102,9 +102,10 @@ referenced above should look something like this:
 
 * Use `opendir()` / `readdir()` / `closedir()` for reading
   directories: see the manual.  You will need to `#define
-  _DEFAULT_SOURCE` before `#include <dirent.h>`.  The
-  expression `e.d_type & DT_DIR` will be nonzero if and only
-  if the directory entry `e` is itself a directory.
+  _DEFAULT_SOURCE` at the top of the file before any
+  includes.  The expression `e.d_type == DT_DIR` will be
+  true if and only if the directory entry `e` is itself a
+  directory.
 
 * It may be helpful to build an array of the following struct
   for sorting the digraphs:
