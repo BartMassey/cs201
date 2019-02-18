@@ -8,13 +8,13 @@ SRC = 	arconst.c avg.c badptr.c bigalloc.c bigdata.c brloop.c \
 	cast.c div0.c dumbidx.c endian.c enum.c finit.c flmul.c \
 	flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c hello.c intsize.c \
 	lls.c mem.c negdiv.c nnss.c nop.c overflow.c promotion.c \
-	readit.c stdint.c uni.c walk.c
+	readit.c stdint.c uni.c walk.c xadd.c
 
 BIN = 	arconst avg badptr bigalloc bigdata brloop \
 	cast div0 dumbidx endian enum finit flmul \
 	flsub ftoc ftoc_fixed ftoc_zero hello intsize \
 	lls mem negdiv nnss nop overflow promotion \
-	readit stdint uni walk
+	readit stdint uni walk xadd
 
 all: $(BIN)
 
@@ -109,6 +109,9 @@ uni: uni.c
 
 walk: walk.c
 	$(CC) $(CFLAGS) -o walk walk.c
+
+xadd: xadd.c
+	$(CC) $(CFLAGS) -o xadd xadd.c
 
 finitcpp.c: finit.c
 	$(CC) -E finit.c | uniq -u | egrep -v '^#' >finitcpp.c
