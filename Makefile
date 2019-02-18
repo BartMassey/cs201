@@ -4,17 +4,22 @@
 CC = gcc
 CFLAGS = -Wall -g
 
-SRC = 	arconst.c avg.c badptr.c brloop.c cast.c div0.c dumbidx.c \
-	endian.c enum.c finit.c flmul.c flsub.c ftoc.c ftoc_fixed.c \
-	ftoc_zero.c intsize.c mem.c negdiv.c nnss.c overflow.c \
-	promotion.c stdint.c strtoi32.c uni.c walk.c
+SRC = 	arc.c arconst.c avg.c badptr.c bigalloc.c bigdata.c \
+	brloop.c cast.c div0.c dumbidx.c endian.c enum.c finit.c \
+	flmul.c flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c hello.c \
+	intsize.c lls.c mem.c negdiv.c nnss.c nop.c overflow.c \
+	promotion.c readit.c stdint.c uni.c walk.c xadd.c
 
-BIN = 	arconst avg badptr brloop cast div0 dumbidx \
-	endian enum finit flmul flsub ftoc ftoc_fixed \
-	ftoc_zero intsize mem negdiv nnss overflow \
-	promotion stdint strtoi32 uni walk
+BIN = 	arc arconst avg badptr bigalloc bigdata \
+	brloop cast div0 dumbidx endian enum finit \
+	flmul flsub ftoc ftoc_fixed ftoc_zero hello \
+	intsize lls mem negdiv nnss nop overflow \
+	promotion readit stdint uni walk xadd
 
 all: $(BIN)
+
+arc: arc.c
+	$(CC) $(CFLAGS) -o arc arc.c
 
 arconst: arconst.c
 	$(CC) $(CFLAGS) -o arconst arconst.c
@@ -24,6 +29,12 @@ avg: avg.c
 
 badptr: badptr.c
 	$(CC) $(CFLAGS) -o badptr badptr.c
+
+bigalloc: bigalloc.c
+	$(CC) $(CFLAGS) -o bigalloc bigalloc.c
+
+bigdata: bigdata.c
+	$(CC) $(CFLAGS) -o bigdata bigdata.c
 
 brloop: brloop.c
 	$(CC) $(CFLAGS) -o brloop brloop.c
@@ -61,8 +72,14 @@ ftoc_fixed: ftoc_fixed.c
 ftoc_zero: ftoc_zero.c
 	$(CC) $(CFLAGS) -o ftoc_zero ftoc_zero.c
 
+hello: hello.c
+	$(CC) $(CFLAGS) -o hello hello.c
+
 intsize: intsize.c
 	$(CC) $(CFLAGS) -o intsize intsize.c
+
+lls: lls.c
+	$(CC) $(CFLAGS) -o lls lls.c
 
 mem: mem.c
 	$(CC) $(CFLAGS) -o mem mem.c
@@ -70,10 +87,13 @@ mem: mem.c
 negdiv: negdiv.c
 	$(CC) $(CFLAGS) -o negdiv negdiv.c
 
-nnss: nnss.o strtoi32.o
-	$(CC) $(CFLAGS) -o nnss nnss.o strtoi32.o
+nnss: nnss.o strtoi32/strtoi32.o
+	$(CC) $(CFLAGS) -o nnss nnss.o strtoi32/strtoi32.o
 
-nnss.o: strtoi32.h
+nnss.o: strtoi32/strtoi32.h
+
+nop: nop.c
+	$(CC) $(CFLAGS) -o nop nop.c
 
 overflow: overflow.c
 	$(CC) $(CFLAGS) -Wno-overflow -o overflow overflow.c
@@ -81,13 +101,11 @@ overflow: overflow.c
 promotion: promotion.c
 	$(CC) $(CFLAGS) -o promotion promotion.c
 
+readit: readit.c
+	$(CC) $(CFLAGS) -o readit readit.c
+
 stdint: stdint.c
 	$(CC) $(CFLAGS) -o stdint stdint.c
-
-strtoi32.o: strtoi32.c
-	$(CC) $(CFLAGS) -c strtoi32.c
-
-strtoi32.o: strtoi32.h
 
 uni: uni.c
 	$(CC) $(CFLAGS) -o uni uni.c
@@ -95,8 +113,14 @@ uni: uni.c
 walk: walk.c
 	$(CC) $(CFLAGS) -o walk walk.c
 
+xadd: xadd.c
+	$(CC) $(CFLAGS) -o xadd xadd.c
+
 finitcpp.c: finit.c
 	$(CC) -E finit.c | uniq -u | egrep -v '^#' >finitcpp.c
 
+.c.s:
+	$(CC) $(CFLAGS) -S $*.c
+
 clean:
-	-rm -f *.o $(BIN)
+	-rm -f *.o *.s $(BIN)
