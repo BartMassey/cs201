@@ -8,13 +8,13 @@ SRC = 	arc.c arconst.c avg.c badptr.c bigalloc.c bigdata.c \
 	brloop.c cast.c div0.c dumbidx.c endian.c enum.c finit.c \
 	flmul.c flsub.c ftoc.c ftoc_fixed.c ftoc_zero.c hello.c \
 	intsize.c lls.c mem.c negdiv.c nnss.c nop.c overflow.c \
-	promotion.c readit.c stdint.c uni.c walk.c xadd.c
+	promotion.c readit.c stdint.c tri.c uni.c walk.c xadd.c
 
 BIN = 	arc arconst avg badptr bigalloc bigdata \
 	brloop cast div0 dumbidx endian enum finit \
 	flmul flsub ftoc ftoc_fixed ftoc_zero hello \
 	intsize lls mem negdiv nnss nop overflow \
-	promotion readit stdint uni walk xadd
+	promotion readit stdint tri uni walk xadd
 
 all: $(BIN)
 
@@ -106,6 +106,14 @@ readit: readit.c
 
 stdint: stdint.c
 	$(CC) $(CFLAGS) -o stdint stdint.c
+
+tri.s: tri.c
+	gcc -Wall -Werror -fno-pic -no-pie -march=x86-64 -mno-sse \
+	  -static -O4 -fno-unroll-loops -S tri.c
+
+tri: tri.s
+	gcc -Wall -Werror -fno-pic -no-pie -march=x86-64 -mno-sse \
+	  -static -O4 -fno-unroll-loops -o tri tri.s
 
 uni: uni.c
 	$(CC) $(CFLAGS) -o uni uni.c
