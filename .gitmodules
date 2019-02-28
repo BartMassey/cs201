@@ -1,3 +1,6 @@
 [submodule "asm-hello"]
 	path = asm-hello
 	url = https://github.com/BartMassey/asm-hello
+[submodule "bigfib"]
+	path = bigfib
+	url = https://github.com/BartMassey/bigfib
