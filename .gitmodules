@@ -4,3 +4,6 @@
 [submodule "bigfib"]
 	path = bigfib
 	url = https://github.com/BartMassey/bigfib
+[submodule "memory"]
+	path = memory
+	url = https://github.com/BartMassey/memory
