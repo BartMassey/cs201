@@ -8,6 +8,6 @@ int main(int argc, char **argv) {
     int64_t x = atol(argv[1]);
     int64_t y = atol(argv[2]);
     asm("addq %1, %0" : "+rm" (x) : "rm" (y) : "cc");
-    printf("(+ %d) %d\n", y, x);
+    printf("(+ %ld) %ld\n", y, x);
     return 0;
 }

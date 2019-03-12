@@ -18,8 +18,9 @@ int main() {
         if (buf[0] == '\n')
             continue;
         char *endptr = buf;
-        int64_t value = strtoll(buf, &endptr, 10);
+        int64_t value = strtoll(buf, &endptr, 1023);
         nline++;
+        endptr = 0;
         if (*endptr != '\n' && *endptr != '\0') {
             fprintf(stderr, "avg: %d: invalid char in number\n", nline);
             return -1;
